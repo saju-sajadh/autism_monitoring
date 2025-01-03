@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../apis/auth_api.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -10,6 +11,11 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _isDark = false;
+  final AuthAPI _authAPI = AuthAPI();
+  void _signOut(BuildContext context) {
+    _authAPI.googleSignout();
+    Navigator.pushReplacementNamed(context, '/signin');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,15 +49,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 ),
                 const Divider(color: Colors.white),
-                const _SingleSection(
+                _SingleSection(
                   children: [
                     _CustomListTile(
                         title: 'Help & Feedback',
                         icon: Icons.help_outline_rounded),
                     _CustomListTile(
                         title: 'About', icon: Icons.info_outline_rounded),
+                    // Sign out tile
                     _CustomListTile(
-                        title: 'Sign out', icon: Icons.exit_to_app_rounded),
+                      title: 'Sign out',
+                      icon: Icons.exit_to_app_rounded,
+                      onTap: () => _signOut(context), // Handle sign-out
+                    ),
                   ],
                 ),
               ],
@@ -67,8 +77,13 @@ class _CustomListTile extends StatelessWidget {
   final String title;
   final IconData icon;
   final Widget? trailing;
+  final Function()? onTap; // Added onTap callback
   const _CustomListTile(
-      {Key? key, required this.title, required this.icon, this.trailing})
+      {Key? key,
+      required this.title,
+      required this.icon,
+      this.trailing,
+      this.onTap})
       : super(key: key);
 
   @override
@@ -80,7 +95,7 @@ class _CustomListTile extends StatelessWidget {
       ),
       leading: Icon(icon, color: Colors.white),
       trailing: trailing,
-      onTap: () {},
+      onTap: onTap, // Handle the tap event
     );
   }
 }

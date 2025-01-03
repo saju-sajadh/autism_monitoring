@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Import for SVG icons
 
-class LandingScreen extends StatelessWidget {
+class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
+
+  @override
+  State<LandingScreen> createState() => LandingScreenState();
+}
+
+class LandingScreenState extends State<LandingScreen> {
   static const Color primary = Color(0xFF00AD48);
 
   @override

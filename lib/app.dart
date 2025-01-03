@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'screens/authenticate_screen.dart';
 import 'screens/chat_bot.dart';
 import 'screens/data_center_screen.dart';
@@ -10,14 +9,31 @@ import 'screens/notification_screen.dart';
 import 'screens/settings_screen.dart';
 import 'widget/bottom_navbar.dart';
 import './screens/landing_screen.dart';
-import 'widget/error_page.dart';
-import 'widget/loading_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class MainApp extends ConsumerWidget {
+class MainApp extends StatefulWidget {
   const MainApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _auth.authStateChanges().listen((event) {
+      setState(() {
+        _user = event;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations(
       [
         DeviceOrientation.portraitUp,
@@ -26,31 +42,21 @@ class MainApp extends ConsumerWidget {
     );
     return MaterialApp(
       theme: ThemeData.light(),
-      home: LandingScreen(),
-      // home: ref.watch(currentUserAccountProvider).when(
-      //     data: (user) {
-      //       if (user != null) {
-      //         return BottomNavBar();
-      //       }
-      //       return const LandingScreen();
-      //     },
-      //     error: (error, st) {
-      //       print(error);
-      //       return ServerDownPage();
-      //     },
-      //     loading: () => const LoadingPage()),
+      home: _user != null ? BottomNavBar() : const LandingScreen(),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/landing': (context) => LandingScreen(),
+        '/landing': (context) =>
+            _user != null ? BottomNavBar() : const LandingScreen(),
         '/home': (context) => BottomNavBar(),
-        '/signin': (context) => Authenticate(),
-        '/settings': (context) => SettingsScreen(),
-        '/notify': (context) => NotificationsScreen(),
-        '/panel1': (context) => DataCenterScreen(),
-        '/panel2': (context) => EmergencyContactScreen(),
+        '/signin': (context) =>
+            _user != null ? BottomNavBar() : const Authenticate(),
+        '/settings': (context) => const SettingsScreen(),
+        '/notify': (context) => const NotificationsScreen(),
+        '/panel1': (context) => const DataCenterScreen(),
+        '/panel2': (context) => const EmergencyContactScreen(),
         '/panel3': (context) => Chatbot(),
-        '/panel4': (context) => SettingsScreen(),
-        '/panel5': (context) => HelpCenterScreen(),
+        '/panel4': (context) => const SettingsScreen(),
+        '/panel5': (context) => const HelpCenterScreen(),
       },
     );
   }

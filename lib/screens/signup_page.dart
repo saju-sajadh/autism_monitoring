@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../apis/auth_api.dart';
 
-import '../constants/auth_controller.dart';
-
-class SignUpPage extends ConsumerStatefulWidget {
+class SignUpPage extends StatefulWidget {
   final VoidCallback onSignInPressed;
 
   const SignUpPage({Key? key, required this.onSignInPressed}) : super(key: key);
 
   @override
-  ConsumerState<SignUpPage> createState() => _SignUpPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends ConsumerState<SignUpPage> {
-  void onSignup(BuildContext context) {
-    try {
-      ref.read(authControllerProvider.notifier).signUp(context: context);
-    } catch (e) {
-      print('error: $e');
+class _SignUpPageState extends State<SignUpPage> {
+  void onSignup(BuildContext context) async {
+    final userCredential = await AuthAPI().googleSignin();
+    if (userCredential != null) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Google Sign-In failed. Please try again.'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 

@@ -1,7 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class DashboardScreen extends StatelessWidget {
+import '../apis/auth_api.dart';
+
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
+
+  @override
+  State<DashboardScreen> createState() => DashboardScreenState();
+}
+
+class DashboardScreenState extends State<DashboardScreen> {
+  late Future<User?> _user;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _user = AuthAPI().getCurrentUser();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,38 +77,58 @@ class DashboardScreen extends StatelessWidget {
   }
 
   Widget _buildGreetingSection() {
-    return Container(
-      padding: const EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
-        color: Colors.grey[900],
-        borderRadius: BorderRadius.circular(12.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8.0,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          const Expanded(
-            child: Text(
-              'Welcome Back!',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+    return FutureBuilder<User?>(
+      future: _user,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (snapshot.hasError) {
+          return Text(
+            'Error: ${snapshot.error}',
+            style: const TextStyle(color: Colors.white),
+          );
+        }
+
+        final user = snapshot.data;
+
+        return Container(
+          padding: const EdgeInsets.all(20.0),
+          decoration: BoxDecoration(
+            color: Colors.grey[900],
+            borderRadius: BorderRadius.circular(12.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8.0,
+                offset: const Offset(0, 4),
               ),
-            ),
+            ],
           ),
-          const Icon(
-            Icons.warning_amber_outlined,
-            size: 30.0,
-            color: Colors.white,
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Welcome ${user?.displayName ?? 'back!'}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const Icon(
+                Icons.warning_amber_outlined,
+                size: 30.0,
+                color: Colors.white,
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
