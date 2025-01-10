@@ -17,7 +17,8 @@ class DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     setState(() {
-      _user = AuthAPI().getCurrentUser();
+      final authAPI = AuthAPI();
+      _user = authAPI.getCurrentUserInstance();
     });
   }
 
@@ -25,24 +26,16 @@ class DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Colors.blueGrey[700],
         automaticallyImplyLeading: false,
         title: const Text(
           'Control Panel',
           style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              Navigator.pushNamed(context, '/notify');
-            },
-          ),
-        ],
         elevation: 8.0, // Added shadow to AppBar
       ),
       body: Container(
-        color: Colors.grey[800],
+        color: Colors.blueGrey[800],
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -64,11 +57,6 @@ class DashboardScreenState extends State<DashboardScreen> {
 
               // Latest Updates section
               _buildLatestUpdatesSection(),
-
-              const SizedBox(height: 20),
-
-              // Action Cards section
-              _buildActionCards(),
             ],
           ),
         ),
@@ -121,7 +109,7 @@ class DashboardScreenState extends State<DashboardScreen> {
                 ),
               ),
               const Icon(
-                Icons.warning_amber_outlined,
+                Icons.accessibility,
                 size: 30.0,
                 color: Colors.white,
               ),
@@ -151,7 +139,7 @@ class DashboardScreenState extends State<DashboardScreen> {
         children: [
           const Icon(
             Icons.circle,
-            color: Colors.red, // Green color for active status
+            color: Colors.blue, // Green color for active status
             size: 12.0,
           ),
           const SizedBox(width: 10.0),
@@ -179,21 +167,21 @@ class DashboardScreenState extends State<DashboardScreen> {
       itemCount: 6, // Number of quick access buttons
       itemBuilder: (context, index) {
         final icons = [
-          Icons.dataset_linked_rounded,
-          Icons.emergency_share,
-          Icons.chat,
-          Icons.settings,
-          Icons.place,
-          Icons.miscellaneous_services,
+          Icons.crisis_alert,
+          Icons.accessibility_new, // Icon for caregiving assistance
+          Icons.favorite_border, // Icon for heart rate monitoring
+          Icons.chat_bubble_outline, // Icon for chat (caregiver support)
+          Icons.local_hospital, // Icon for medical services
+          Icons.person, // Icon for service status
         ];
 
         final texts = [
-          'Data Center',
-          'Em-Contact',
-          'Chat',
-          'Settings',
-          'H-Centers',
-          'Service',
+          'Detect Fall',
+          'Emotion Analyzer', // Text for caregiving assistance
+          'Heart Rate Monitoring', // Text for heart rate monitoring
+          'Chat', // Text for caregiver chat
+          'Status',
+          'Profile' // Text for service status
         ];
 
         return GestureDetector(
@@ -204,7 +192,7 @@ class DashboardScreenState extends State<DashboardScreen> {
           child: Container(
             padding: const EdgeInsets.all(15.0),
             decoration: BoxDecoration(
-              color: Colors.red[700],
+              color: Colors.blue[700],
               borderRadius: BorderRadius.circular(12.0),
               boxShadow: [
                 BoxShadow(
@@ -266,20 +254,26 @@ class DashboardScreenState extends State<DashboardScreen> {
           ),
           const SizedBox(height: 10.0),
           _buildUpdateItem(
-              'New accident detection system updated', Icons.update),
-          _buildUpdateItem('Check your insurance status', Icons.notifications),
+              'Caregiver advisory service now available', Icons.update),
           _buildUpdateItem(
-              'Crash advisor service now available', Icons.check_circle),
+              'Check your caregiving support status', Icons.notifications),
+          _buildUpdateItem(
+              'New caregiving support system available', Icons.check_circle),
+          _buildUpdateItem('Explore our new caregiver resource center',
+              Icons.account_balance),
+      
         ],
       ),
     );
   }
 
   Widget _buildUpdateItem(String text, IconData icon) {
-    return Row(
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0), 
+    child: Row(
       children: [
         Icon(icon, color: Colors.white, size: 20.0),
-        const SizedBox(width: 10.0),
+        const SizedBox(width: 20.0),
         Expanded(
           child: Text(
             text,
@@ -290,67 +284,8 @@ class DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
       ],
-    );
-  }
+    ),
+  );
+}
 
-  Widget _buildActionCards() {
-    return Container(
-      padding: const EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: Colors.red[700],
-        borderRadius: BorderRadius.circular(12.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8.0,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          _buildActionCard('Frequently asked!', Icons.question_answer),
-          _buildActionCard('Request Assistance', Icons.help_outline),
-          _buildActionCard('View History', Icons.history),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildActionCard(String title, IconData icon) {
-    return GestureDetector(
-      onTap: () {
-        // Navigate to the appropriate page
-      },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 15.0),
-        padding: const EdgeInsets.all(15.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 8.0,
-              offset: Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Icon(icon, color: Colors.black, size: 20.0),
-            const SizedBox(width: 15.0),
-            Text(
-              title,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

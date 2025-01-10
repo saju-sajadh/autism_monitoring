@@ -13,8 +13,7 @@ class LandingScreenState extends State<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         body: Stack(
           children: [
             Container(
@@ -23,8 +22,8 @@ class LandingScreenState extends State<LandingScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.5), // Slightly darker at the top
-                    Colors.black.withOpacity(0.9), // Slightly
+                    Colors.white.withOpacity(0.5), // Slightly darker at the top
+                    Colors.white.withOpacity(0.9), // Slightly
                   ],
                 ),
               ),
@@ -36,7 +35,7 @@ class LandingScreenState extends State<LandingScreen> {
               height: MediaQuery.of(context).size.height * 0.45, // 45% height
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.red[700],
+                  color: Colors.blue[700],
                   borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(25.0),
                     bottomRight: Radius.circular(25.0),
@@ -45,24 +44,24 @@ class LandingScreenState extends State<LandingScreen> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.warning,
+                  children: const [
+                    Icon(
+                      Icons.accessibility, 
                       size: 50.0,
                       color: Colors.white,
                     ),
-                    const SizedBox(height: 10.0),
-                    const Text(
-                      'Accident Detection',
+                    SizedBox(height: 10.0),
+                    Text(
+                      'Autism Caregiving',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: 5.0),
-                    const Text(
-                      'Crash Advisor is here to help.',
+                    SizedBox(height: 5.0),
+                    Text(
+                      'Supporting individuals with autism.',
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -75,83 +74,82 @@ class LandingScreenState extends State<LandingScreen> {
               top: MediaQuery.of(context).size.height * 0.45, // Below
               left: 20.0, // Add some left padding
               right: 20.0, // Add some right padding
-              // ignore: lines_longer_than_80_chars
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center, // Align
                 children: [
-                  SizedBox(height: 20),
-                  // Row 1 - Text with leading tick mark
+                  const SizedBox(height: 20),
+                  // Row 1 - Text with leading check mark
                   Row(
                     children: [
                       Icon(
-                        Icons.verified,
-                        color: Colors.white,
+                        Icons.check_circle,
+                        color: Colors.blue[700],
                       ),
                       const SizedBox(width: 10.0),
                       Text(
-                        'Make sure you and others are OK',
+                        'Support positive behaviors',
                         style: TextStyle(
                             fontSize: 16.0,
-                            color: Colors.white.withOpacity(0.8),
+                            color: Colors.black.withOpacity(0.8),
                             fontFamily: 'Roboto' // Or your preferred font
                             ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 15.0), // Add spacing between rows
-                  // Row 2 - Text with leading tick mark
+                  // Row 2 - Text with leading check mark
                   Row(
                     children: [
                       Icon(
-                        Icons.verified,
-                        color: Colors.white,
+                        Icons.check_circle,
+                        color: Colors.blue[700],
                       ),
                       const SizedBox(width: 10.0),
                       Text(
-                        'Move your vehicle out of the way of traffic',
+                        'Promote communication skills',
                         style: TextStyle(
                           fontSize: 16.0,
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.black.withOpacity(0.8),
                           fontFamily: 'Roboto', // Or your preferred font
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 15.0), // Add spacing between rows
-                  // Row 3 - Text with leading tick mark
+                  // Row 3 - Text with leading check mark
                   Row(
                     children: [
                       Icon(
-                        Icons.verified,
-                        color: Colors.white,
+                        Icons.check_circle,
+                        color: Colors.blue[700],
                       ),
                       const SizedBox(width: 10.0),
                       Text(
-                        'Do not admit fault to anyone',
+                        'Ensure safety and well-being',
                         style: TextStyle(
                           fontSize: 16.0,
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.black.withOpacity(0.8),
                           fontFamily: 'Roboto', // Or your preferred font
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 40.0), // Add spacing below tick marks
+                  const SizedBox(height: 40.0), // Add spacing below check marks
                   Text(
-                    'Report details about the accident',
+                    'Provide specialized care and attention',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.black.withOpacity(0.8),
                       fontFamily: 'Roboto', // Or your preferred font
                     ),
                   ),
                   const SizedBox(height: 5.0),
                   Text(
-                    '''Easily capture crash details, notify your insurance carrier, and book concierge''',
+                    '''Assist caregivers with personalized care plans and behavior management strategies''',
                     style: TextStyle(
                       fontSize: 14.0,
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.black.withOpacity(0.8),
                       fontFamily: 'Roboto', // Or your preferred font
                     ),
                   ),
@@ -161,15 +159,15 @@ class LandingScreenState extends State<LandingScreen> {
                       // Handle button press
                       Navigator.pushNamed(context, '/signin');
                     },
-                    child: Text(
-                      'Authenticate',
+                    child: const Text(
+                      'Get Started',
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
+                      primary: Colors.blue[700],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -182,7 +180,7 @@ class LandingScreenState extends State<LandingScreen> {
             ),
           ],
         ),
-      ),
+
     );
   }
 }

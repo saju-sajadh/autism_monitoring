@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'screens/authenticate_screen.dart';
 import 'screens/chat_bot.dart';
-import 'screens/data_center_screen.dart';
-import 'screens/em_contact_screen.dart';
-import 'screens/help_center_screen.dart';
-import 'screens/notification_screen.dart';
-import 'screens/settings_screen.dart';
+import 'screens/emolyzer_screen.dart';
+import 'screens/patient_screen.dart';
+import 'screens/profile_screen.dart';
+import 'screens/remote_auth.dart';
 import 'widget/bottom_navbar.dart';
 import './screens/landing_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,13 +49,10 @@ class _MainAppState extends State<MainApp> {
         '/home': (context) => BottomNavBar(),
         '/signin': (context) =>
             _user != null ? BottomNavBar() : const Authenticate(),
-        '/settings': (context) => const SettingsScreen(),
-        '/notify': (context) => const NotificationsScreen(),
-        '/panel1': (context) => const DataCenterScreen(),
-        '/panel2': (context) => const EmergencyContactScreen(),
-        '/panel3': (context) => Chatbot(),
-        '/panel4': (context) => const SettingsScreen(),
-        '/panel5': (context) => const HelpCenterScreen(),
+        '/panel2': (context) => const PatientEmotionScreen(),
+        '/panel6': (context) => ProfileScreen(_user),
+        '/patient': (context) => const PatientDetailsScreen(),
+        '/remote': (context) => const RemoteAuth(),
       },
     );
   }

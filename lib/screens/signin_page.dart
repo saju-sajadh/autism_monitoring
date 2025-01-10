@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../apis/auth_api.dart';
 
 class SignInPage extends StatelessWidget {
   final VoidCallback onSignUpPressed;
@@ -7,6 +8,21 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    void onSignin(BuildContext context) async {
+    final userCredential = await AuthAPI().googleSignin();
+    if (userCredential != null) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Google Sign-In failed. Please try again.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -20,10 +36,10 @@ class SignInPage extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 40.0),
+          const SizedBox(height: 30.0),
           OutlinedButton.icon(
-            onPressed: () {
-              Navigator.pushNamed(context, '/home');
+           onPressed: () {
+              onSignin(context);
             },
             icon: const Icon(Icons.drafts, color: Colors.red),
             label: const Text(
@@ -40,27 +56,8 @@ class SignInPage extends StatelessWidget {
               ),
               side: const BorderSide(color: Colors.black),
             ),
-          ),
-          const SizedBox(height: 20.0),
-          OutlinedButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.facebook, color: Colors.blue),
-            label: const Text(
-              'Sign in with Facebook',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            style: OutlinedButton.styleFrom(
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              side: const BorderSide(color: Colors.black),
-            ),
-          ),
-          const SizedBox(height: 40.0),
+          ),        
+          const SizedBox(height: 30.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

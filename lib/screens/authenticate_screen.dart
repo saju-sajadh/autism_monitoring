@@ -25,8 +25,8 @@ class _AuthenticateState extends State<Authenticate> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.black.withOpacity(0.5),
-                  Colors.black.withOpacity(0.9),
+                  Colors.blueGrey.withOpacity(0.5),
+                  Colors.blueGrey.withOpacity(0.9),
                 ],
               ),
             ),
@@ -43,7 +43,7 @@ class _AuthenticateState extends State<Authenticate> {
             height: MediaQuery.of(context).size.height * 0.45,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.red[700],
+                color: Colors.blue[700],
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(25.0),
                   topRight: Radius.circular(25.0),

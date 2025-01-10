@@ -1,4 +1,4 @@
-package com.sajadh.accidentdetection
+package com.sajadh.caregiving
 
 import io.flutter.embedding.android.FlutterActivity
 

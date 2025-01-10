@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../apis/auth_api.dart';
+import '../model/user_model.dart';
 
 class SignUpPage extends StatefulWidget {
   final VoidCallback onSignInPressed;
@@ -14,10 +15,25 @@ class _SignUpPageState extends State<SignUpPage> {
   void onSignup(BuildContext context) async {
     final userCredential = await AuthAPI().googleSignin();
     if (userCredential != null) {
+      final userData = UserModel(
+          disorderName: '',
+          email: userCredential.user?.email ?? '',
+          emotion: '',
+          patientAge: '18',
+          patientGender: '',
+          patientName: '',
+          phoneNumber: '',
+          sessionId: '',
+          uid: userCredential.user?.uid ?? '');
+      final authAPI = AuthAPI();
+      final loggedUser = await authAPI.readCurrentUser();
+      if (loggedUser == null) {
+        await authAPI.createUser(userData);
+      }
       Navigator.pushReplacementNamed(context, '/home');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Google Sign-In failed. Please try again.'),
           backgroundColor: Colors.red,
         ),
@@ -40,7 +56,7 @@ class _SignUpPageState extends State<SignUpPage> {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 30.0),
           OutlinedButton.icon(
             onPressed: () {
               onSignup(context);
@@ -61,26 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
               side: const BorderSide(color: Colors.black),
             ),
           ),
-          const SizedBox(height: 20.0),
-          OutlinedButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.facebook, color: Colors.blue),
-            label: const Text(
-              'Sign up with Facebook',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            style: OutlinedButton.styleFrom(
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              side: const BorderSide(color: Colors.black),
-            ),
-          ),
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 30.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

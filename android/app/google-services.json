@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "432898819216",
-    "project_id": "accident-detection-61f9e",
-    "storage_bucket": "accident-detection-61f9e.firebasestorage.app"
+    "project_number": "29155841575",
+    "project_id": "autismmonitoring",
+    "storage_bucket": "autismmonitoring.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:432898819216:android:51c5cfdae6c12e472f0415",
+        "mobilesdk_app_id": "1:29155841575:android:f0395af0e99ef09b176002",
         "android_client_info": {
-          "package_name": "com.sajadh.accidentdetection"
+          "package_name": "com.sajadh.caregiving"
         }
       },
       "oauth_client": [
         {
-          "client_id": "432898819216-ntji55r36k33id267rngk73icq37rrj0.apps.googleusercontent.com",
+          "client_id": "29155841575-aj78ufuj2bt87q6sr72cp04tcl1akkj3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDMuDuZaqlrS93Zl4zA5JaoMbcL_KSn_OQ"
+          "current_key": "AIzaSyCdEwbwQXoKLAQuwrXBoP0jcOZEssxZTrU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "432898819216-ntji55r36k33id267rngk73icq37rrj0.apps.googleusercontent.com",
+              "client_id": "29155841575-aj78ufuj2bt87q6sr72cp04tcl1akkj3.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "432898819216-mosehtd5dhrsounor2tdfgs1li09nuui.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.sajadh.accidentdetection"
-              }
             }
           ]
         }

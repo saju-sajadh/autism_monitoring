@@ -50,21 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDMuDuZaqlrS93Zl4zA5JaoMbcL_KSn_OQ',
-    appId: '1:432898819216:android:51c5cfdae6c12e472f0415',
-    messagingSenderId: '432898819216',
-    projectId: 'accident-detection-61f9e',
-    storageBucket: 'accident-detection-61f9e.firebasestorage.app',
+    apiKey: 'AIzaSyCdEwbwQXoKLAQuwrXBoP0jcOZEssxZTrU',
+    appId: '1:29155841575:android:f0395af0e99ef09b176002',
+    messagingSenderId: '29155841575',
+    projectId: 'autismmonitoring',
+    storageBucket: 'autismmonitoring.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDbfjLCJtzwDpMboMFrvnE4KouJ4pjKiag',
-    appId: '1:432898819216:ios:03635edd5a11e38a2f0415',
-    messagingSenderId: '432898819216',
-    projectId: 'accident-detection-61f9e',
-    storageBucket: 'accident-detection-61f9e.firebasestorage.app',
-    iosClientId: '432898819216-mosehtd5dhrsounor2tdfgs1li09nuui.apps.googleusercontent.com',
-    iosBundleId: 'com.sajadh.accidentdetection',
+    apiKey: 'AIzaSyBb6Ax0dNIgTbLqKvnn50xgK6H3qdJYiVk',
+    appId: '1:29155841575:ios:269055beaba07d12176002',
+    messagingSenderId: '29155841575',
+    projectId: 'autismmonitoring',
+    storageBucket: 'autismmonitoring.firebasestorage.app',
+    iosClientId: '29155841575-fc4tfqrabsqdj18usqsdf502h39avptq.apps.googleusercontent.com',
+    iosBundleId: 'com.sajadh.caregiving',
   );
-
 }
